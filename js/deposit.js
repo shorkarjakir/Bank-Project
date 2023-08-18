@@ -4,22 +4,37 @@ document.getElementById('btn-deposit').addEventListener('click', function () {
   const depositField = document.getElementById('dollar-input');
   const newdepositValue = depositField.value;
   const newDepositAmount = parseFloat(newdepositValue);
+
+    // return emty field 
+  depositField.value = '';
+
+  if (isNaN(newDepositAmount)) {
+    alert("Please enter a valid amount");
+    return;
+  }
+  else if ((newDepositAmount < 0) || !isFinite(newDepositAmount)){
+    alert(`You can't withdraw ${newDepositAmount}`);
+    return;
+  };
+
   // step-3: set the total amount in deposit field. 
   const totalDepositelement = document.getElementById('deposit-total');
   const predepositTotal = totalDepositelement.innerText;
   const preDepositAmount = parseFloat(predepositTotal);
+
   // step-4: set the total Numbers 
   const totalDepositAmount = newDepositAmount + preDepositAmount;
   totalDepositelement.innerText = totalDepositAmount;
+
   // step-5: get the balance total 
   const getTotalBalance = document.getElementById('total-balance');
   const totalBalance = getTotalBalance.innerText;
   const pretotalBalanceString = parseFloat(totalBalance);
+
   // step-6: Calculate the total Balance
   const currentTotalBalance = pretotalBalanceString + newDepositAmount;
 
   getTotalBalance.innerText = currentTotalBalance;
 
-  // return emty field 
-  depositField.value = '';
+
 })
